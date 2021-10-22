@@ -93,7 +93,7 @@ public class AmazonClient {
     public void downloadFile(String fileName) {
         try {
             ByteArrayOutputStream outputStream = downloadFileFroms3bucket(fileName);
-            try(OutputStream outputStream2 = new FileOutputStream("temp_index" + "\\" + fileName)) {
+            try(OutputStream outputStream2 = new FileOutputStream("temp_index" + File.separator + fileName)) {
                 outputStream.writeTo(outputStream2);
             }
         } catch (Exception e) {

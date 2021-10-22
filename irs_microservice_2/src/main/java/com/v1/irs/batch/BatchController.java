@@ -42,6 +42,13 @@ public class BatchController {
     public Batch saveUser(@RequestParam String batchName, @RequestPart(value = "file") MultipartFile file,
                           @RequestHeader (name="Authorization") String token) throws Exception {
 
+        File folder1 = new File("temp_zip");
+        folder1.mkdir();
+        File folder2 = new File("temp_unzip");
+        folder2.mkdir();
+        File folder3 = new File("temp_index");
+        folder3.mkdir();
+
         token = token.replace("Bearer ", "");
         Batch batch = new Batch();
         batch.setBatchName(batchName);
@@ -54,12 +61,12 @@ public class BatchController {
         String batchLocation = s3Loc + fileName;
         File convFile = this.amazonClient.uploadFile(file, fileName);
 
-        String unzipLoc = "temp_unzip" + "\\" + fileName.replace(".zip", "");
+        String unzipLoc = "temp_unzip" + File.separator + fileName.replace(".zip", "");
         List<File> filesInZip = zipManager.unzipFile(convFile, unzipLoc);
-        String indexLoc = "temp_index" + "\\" + fileName.replace(".zip", "");
+        String indexLoc = "temp_index" + File.separator + fileName.replace(".zip", "");
         informationRetrievalHandler.createIndex(filesInZip, indexLoc);
 
-        String zipLoc = "temp_zip" + "\\" + "index-" + fileName;
+        String zipLoc = "temp_zip" + File.separator + "index-" + fileName;
         File folderToZip = new File(indexLoc);
         zipManager.zipDirectory(folderToZip, zipLoc);
 

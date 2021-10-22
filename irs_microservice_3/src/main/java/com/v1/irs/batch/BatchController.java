@@ -45,6 +45,13 @@ public class BatchController {
     public String query(@RequestBody String inputJson,
                           @RequestHeader (name="Authorization") String token) throws Exception {
 
+        File folder1 = new File("temp_zip");
+        folder1.mkdir();
+        File folder2 = new File("temp_unzip");
+        folder2.mkdir();
+        File folder3 = new File("temp_index");
+        folder3.mkdir();
+
         JSONObject jsonObj = new JSONObject(inputJson);
         String batchName = jsonObj.getString("batchName");
         String query = jsonObj.getString("query");
@@ -55,10 +62,10 @@ public class BatchController {
         String fileName = "index-" + batchId + "-" + batchName + "-" + userName + ".zip";
         this.amazonClient.downloadFile(fileName);
 
-        File zippedIndex = new File("temp_index" + "\\" + fileName);
-        String unzipLoc = "temp_unzip" + "\\" + fileName.replace(".zip", "");
+        File zippedIndex = new File("temp_index" + File.separator + fileName);
+        String unzipLoc = "temp_unzip" + File.separator + fileName.replace(".zip", "");
         List<File> filesInZip = zipManager.unzipFile(zippedIndex, unzipLoc);
-        unzipLoc = unzipLoc + "\\" + fileName.replace("index-","").replace(".zip","");
+        unzipLoc = unzipLoc + File.separator + fileName.replace("index-","").replace(".zip","");
 
         List<JSONObject> listOfObjs = new LinkedList<JSONObject>();
         listOfObjs = informationRetrievalHandler.query(query, unzipLoc);
