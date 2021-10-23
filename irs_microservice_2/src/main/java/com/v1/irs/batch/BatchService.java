@@ -23,4 +23,10 @@ public class BatchService {
         return batches;
     }
 
+    @Transactional
+    public Batch findBatchByBatchName(String batchName) {
+        Batch batch = batchRepository.findBatchByBatchName(batchName);
+        return batch;
+    }
+
 }

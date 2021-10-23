@@ -44,6 +44,36 @@ public class BatchController {
         this.amazonClient = amazonClient;
     }
 
+    @RequestMapping(value = "/delete_batch", method = RequestMethod.DELETE)
+    public String deleteBatch(@RequestBody Batch batchIn) throws Exception {
+
+            Batch batch = batchService.findBatchByBatchName(batchIn.getBatchName());
+
+            try {
+                String batchIndexLoc = batch.getBatchIndexLocation();
+                String filename2 = batchIndexLoc.substring(batchIndexLoc.lastIndexOf('/') + 1);
+//                System.out.println("=====================================");
+//                System.out.println(filename2);
+//                System.out.println("=====================================");
+                amazonClient.deleteFile(filename2);
+            } catch (Exception e) {
+            }
+
+            try {
+                String batchLoc = batch.getBatchLocation();
+                String filename1 = batchLoc.substring(batchLoc.lastIndexOf('/') + 1);
+//                System.out.println("=====================================");
+//                System.out.println(filename1);
+//                System.out.println("=====================================");
+                amazonClient.deleteFile(filename1);
+            } catch (Exception e) {
+            }
+
+            batchRepository.delete(batch);
+
+        return "Batch " + batch.getBatchName() + " Deleted!";
+    }
+
     @RequestMapping(value = "/delete_account", method = RequestMethod.DELETE)
     public String deleteAccount(@RequestBody User user) throws Exception {
 

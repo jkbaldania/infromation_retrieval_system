@@ -11,4 +11,6 @@ public interface BatchRepository extends JpaRepository<Batch, Integer> {
 
     List<Batch> findBatchesByUserName(String userName);
 
+    Batch findBatchByBatchName(String batchName);
+
 }
