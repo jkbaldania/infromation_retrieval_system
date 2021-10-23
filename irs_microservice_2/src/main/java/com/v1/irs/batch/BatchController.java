@@ -2,9 +2,12 @@ package com.v1.irs.batch;
 
 import com.v1.irs.irhandler.InformationRetrievalHandler;
 import com.v1.irs.jwt.JwtTokenUtil;
+import com.v1.irs.user.User;
+import com.v1.irs.user.UserRepository;
 import com.v1.irs.zip.ZipManager;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,11 +22,14 @@ public class BatchController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-//    @Autowired
-//    private BatchRepository batchRepository;
+    @Autowired
+    private BatchRepository batchRepository;
 
     @Autowired
     private BatchService batchService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private AmazonClient amazonClient;
 
@@ -36,6 +42,39 @@ public class BatchController {
     @Autowired
     BatchController(AmazonClient amazonClient) {
         this.amazonClient = amazonClient;
+    }
+
+    @RequestMapping(value = "/delete_account", method = RequestMethod.DELETE)
+    public String deleteAccount(@RequestBody User user) throws Exception {
+
+        List<Batch> batches = batchService.findBatchesByUserName(user.getUsername());
+        batches.forEach(batch -> {
+
+            try {
+                String batchIndexLoc = batch.getBatchIndexLocation();
+                String filename2 = batchIndexLoc.substring(batchIndexLoc.lastIndexOf('/') + 1);
+//                System.out.println("=====================================");
+//                System.out.println(filename2);
+//                System.out.println("=====================================");
+                amazonClient.deleteFile(filename2);
+            } catch (Exception e) {
+            }
+
+            try {
+                String batchLoc = batch.getBatchLocation();
+                String filename1 = batchLoc.substring(batchLoc.lastIndexOf('/') + 1);
+//                System.out.println("=====================================");
+//                System.out.println(filename1);
+//                System.out.println("=====================================");
+                amazonClient.deleteFile(filename1);
+            } catch (Exception e) {
+            }
+
+            batchRepository.delete(batch);
+        });
+        userRepository.delete(user);
+
+        return "Account of username " + user.getUsername() +" Deleted!";
     }
 
     @RequestMapping(value = "/add_batch", method = RequestMethod.POST)

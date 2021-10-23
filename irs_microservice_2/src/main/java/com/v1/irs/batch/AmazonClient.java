@@ -5,15 +5,14 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Date;
 
 @Service
@@ -75,4 +74,17 @@ public class AmazonClient {
             e.printStackTrace();
         }
     }
+
+    private void deleteFileFroms3bucket(String fileName) {
+        s3client.deleteObject(new DeleteObjectRequest(bucketName,fileName));
+    }
+
+    public void deleteFile(String fileName) {
+        try {
+            deleteFileFroms3bucket(fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
