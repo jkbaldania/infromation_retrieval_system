@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -108,7 +109,7 @@ public class BatchController {
     }
 
     @RequestMapping(value = "/add_batch", method = RequestMethod.POST)
-    public Batch saveUser(@RequestParam String batchName, @RequestPart(value = "file") MultipartFile file,
+    public String saveUser(@RequestParam String batchName, @RequestPart(value = "file") MultipartFile file,
                           @RequestHeader (name="Authorization") String token) throws Exception {
 
         File folder1 = new File("temp_zip");
@@ -124,6 +125,15 @@ public class BatchController {
         String userName = jwtTokenUtil.getUsernameFromToken(token);
         batch.setUserName(userName);
         String s3Loc = this.amazonClient.getFileUrl();
+
+        List<Batch> batches = batchService.findBatchesByUserName(userName);
+        List<String> existingBatchNames = new LinkedList<>();
+        batches.forEach(batch2 -> {
+            existingBatchNames.add(batch2.getBatchName());
+                });
+        if (existingBatchNames.contains(batchName)) {
+            return "Batch " + batchName + " Already Exists!";
+        }
 
         Integer batchId = batchService.saveBatch(batch);
         String fileName = batchId + "-" + batchName + "-" + userName + ".zip";
@@ -152,7 +162,7 @@ public class BatchController {
         FileUtils.cleanDirectory(new File("temp_unzip"));
         FileUtils.cleanDirectory(new File("temp_zip"));
 
-        return batch;
+        return "Batch " + batchName + " Created!";
     }
 
 }
