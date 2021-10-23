@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "31d6037f-e9f3-4592-9eb3-cbaf73580722",
+		"name": "Docker MS2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add_batch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqa2JhbGRhbmlhIiwiZXhwIjoxNjM1MDIzNzg3LCJpYXQiOjE2MzUwMDU3ODd9.b8fvgJ0wcc0kXbDdbYl8RzfKRQSdZGZUMcKzmIz3UQ6fne-CUkUyVj8rX6W78vXzWDS-PFD7AywrUWKqnqa_SA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/jkbal/Downloads/testFiles.zip"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8882/add_batch?batchName=FILES_COLLECTION_2",
+					"host": [
+						"localhost"
+					],
+					"port": "8882",
+					"path": [
+						"add_batch"
+					],
+					"query": [
+						{
+							"key": "batchName",
+							"value": "FILES_COLLECTION_2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqa2JhbGRhbmlhIiwiZXhwIjoxNjM1MDIzNzg3LCJpYXQiOjE2MzUwMDU3ODd9.b8fvgJ0wcc0kXbDdbYl8RzfKRQSdZGZUMcKzmIz3UQ6fne-CUkUyVj8rX6W78vXzWDS-PFD7AywrUWKqnqa_SA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"jkbaldania2\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8882/delete_account",
+					"host": [
+						"localhost"
+					],
+					"port": "8882",
+					"path": [
+						"delete_account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_batch",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqa2JhbGRhbmlhIiwiZXhwIjoxNjM1MDIzNzg3LCJpYXQiOjE2MzUwMDU3ODd9.b8fvgJ0wcc0kXbDdbYl8RzfKRQSdZGZUMcKzmIz3UQ6fne-CUkUyVj8rX6W78vXzWDS-PFD7AywrUWKqnqa_SA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"batchName\":\"bc1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8882/delete_batch",
+					"host": [
+						"localhost"
+					],
+					"port": "8882",
+					"path": [
+						"delete_batch"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "1fc0df95-7608-4604-b018-392746660b11",
+		"name": "Docker MS1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"jkbaldania\",\"email\":\"jkbaldania@gmail.com\",\"name\":\"Jay Baldania\",\"password\":\"jkbaldania\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8881/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authenticate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"jkbaldania\",\"password\":\"jkbaldania\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8881/authenticate",
+					"host": [
+						"localhost"
+					],
+					"port": "8881",
+					"path": [
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

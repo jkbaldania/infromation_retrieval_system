@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "b6994e66-0bd2-4d8f-8823-2ef421160930",
+		"name": "Docker MS3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "query_batch",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqa2JhbGRhbmlhIiwiZXhwIjoxNjM1MDIzNzg3LCJpYXQiOjE2MzUwMDU3ODd9.b8fvgJ0wcc0kXbDdbYl8RzfKRQSdZGZUMcKzmIz3UQ6fne-CUkUyVj8rX6W78vXzWDS-PFD7AywrUWKqnqa_SA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"batchName\":\"FILES_COLLECTION_1\",\"query\":\"tired\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8883/query_batch",
+					"host": [
+						"localhost"
+					],
+					"port": "8883",
+					"path": [
+						"query_batch"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

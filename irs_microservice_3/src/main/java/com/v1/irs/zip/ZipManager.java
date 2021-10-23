@@ -1,11 +1,13 @@
 package com.v1.irs.zip;
 
+import net.lingala.zip4j.ZipFile;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -105,6 +107,14 @@ public class ZipManager {
         }
 
         return destFile;
+    }
+
+    public static void unzipFolderZip4j(Path source, Path target)
+            throws IOException {
+
+        new ZipFile(source.toFile())
+                .extractAll(target.toString());
+
     }
 
 }

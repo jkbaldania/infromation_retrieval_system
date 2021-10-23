@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -65,9 +67,11 @@ public class BatchController {
 
         File zippedIndex = new File("temp_index" + File.separator + fileName);
         String unzipLoc = "temp_unzip" + File.separator + fileName.replace(".zip", "");
-        List<File> filesInZip = zipManager.unzipFile(zippedIndex, unzipLoc);
-        Scanner scanner = new Scanner(System.in);
-        String line = scanner.nextLine();
+//        List<File> filesInZip = zipManager.unzipFile(zippedIndex, unzipLoc);
+        Path source = Paths.get(zippedIndex.getAbsolutePath());
+        Path target = Paths.get(unzipLoc);
+        zipManager.unzipFolderZip4j(source, target);
+
         unzipLoc = unzipLoc + File.separator + fileName.replace("index-","").replace(".zip","");
 
         List<JSONObject> listOfObjs = new LinkedList<JSONObject>();
