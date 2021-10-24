@@ -1,5 +1,5 @@
 # Information Retrieval System
-This repository is created to develop a Java Spring Boot based REST Web Application for the use case of Information Retrieval of Documents.
+A Java Spring Boot based REST Web Application for the use case of Information Retrieval of Documents (under development).
 
 ## Use cases
 * User can register with email, username, password and name.
@@ -11,7 +11,7 @@ This repository is created to develop a Java Spring Boot based REST Web Applicat
 * User can delete the account.
 
 ## Sequence Diagram
-![sequence_diagram drawio](https://user-images.githubusercontent.com/56929164/138592322-6edc3d08-639e-4cb1-b859-ba1bf273dc8d.png)
+![sequence_diagram drawio](https://user-images.githubusercontent.com/56929164/138592494-11c891c6-c2fe-49de-9b5d-741b2de3fc6b.png)
 
 ## Resources and Methods
 
