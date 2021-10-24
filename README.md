@@ -10,6 +10,9 @@ This repository is created to develop a Java Spring Boot based REST Web Applicat
 * User can delete any batch.
 * User can delete the account.
 
+## Sequence Diagram
+![sequence_diagram drawio](https://user-images.githubusercontent.com/56929164/138592322-6edc3d08-639e-4cb1-b859-ba1bf273dc8d.png)
+
 ## Resources and Methods
 
 ### POST /register
