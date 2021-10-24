@@ -1,0 +1,17 @@
+[
+	{
+		"targetGroupArn": "<target-group-arn>",
+		"containerName": "irs-1",
+		"containerPort": 8081
+	},
+	{
+		"targetGroupArn": "<target-group-arn>",
+		"containerName": "irs-2",
+		"containerPort": 8082
+	},
+	{
+		"targetGroupArn": "<target-group-arn>",
+		"containerName": "irs-3",
+		"containerPort": 8083
+	}
+]

@@ -1,0 +1,20 @@
+{
+    "irs-1": {
+        "image": ":irs-backend.irs-1.1",
+        "ports": {
+            "5000": "HTTP"
+        }
+    },
+	"irs-2": {
+        "image": ":irs-backend.irs-2.2",
+        "ports": {
+            "5001": "HTTP"
+        }
+    },
+	"irs-3": {
+        "image": ":irs-backend.irs-3.3",
+        "ports": {
+            "5002": "HTTP"
+        }
+    }
+}

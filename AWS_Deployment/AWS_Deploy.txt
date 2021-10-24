@@ -1,0 +1,82 @@
+Make sure that you have all the container images (irs-1, irs-2, irs-3)
+
+Open cmd.
+
+Run command : aws configure
+	- Put Access Key ID
+	- Put Secret Access Key
+	- Put region : eu-central-1
+	- Put default output format : json
+
+Run command : aws lightsail create-container-service --service-name irs-backend --power micro --scale 1
+
+Run command : aws lightsail get-container-services --service-name irs-backend
+
+Run above command again and check if the "state" is "READY". Once it is, go ahead.
+
+Run command : aws lightsail push-container-image --service-name irs-backend --label irs-1 --image irs-1
+
+Note down this message : Refer to this image as ":irs-backend.irs-1.1" in deployments.
+
+Run command : aws lightsail push-container-image --service-name irs-backend --label irs-2 --image irs-2
+
+Note down this message : Refer to this image as ":irs-backend.irs-2.2" in deployments.
+
+Run command : aws lightsail push-container-image --service-name irs-backend --label irs-3 --image irs-3
+
+Note down this message : Refer to this image as ":irs-backend.irs-3.3" in deployments.
+
+Run command : cd [path to project repo root]
+
+Create file "containers.json" at the [path to project repo root].
+
+Write this in "containers.json" file. The ports should be the same as in application.properties of Spring Boot App.
+{
+    "irs-1": {
+        "image": ":irs-backend.irs-1.1",
+        "ports": {
+            "8081": "HTTP"
+        }
+    },
+	"irs-2": {
+        "image": ":irs-backend.irs-2.2",
+        "ports": {
+            "8082": "HTTP"
+        }
+    },
+	"irs-3": {
+        "image": ":irs-backend.irs-3.3",
+        "ports": {
+            "8083": "HTTP"
+        }
+    }
+}
+
+Run command : aws lightsail create-container-service-deployment --service-name irs-backend --containers file://containers.json
+
+See that the "state" is "DEPLOYING".
+
+Run command : aws lightsail get-container-services --service-name irs-backend
+
+Run above command again and check if the "state" is "RUNNING". Once it is, go ahead.
+
+That's it. The containers are deployed to AWS.
+
+TO DELETE THE CONTAINER SERVICE CREATED ABOVE:
+Run command : aws lightsail delete-container-service --service-name irs-backend
+
+References:
+https://aws.amazon.com/getting-started/hands-on/serve-a-flask-app/
+
+aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 462788217901.dkr.ecr.eu-central-1.amazonaws.com
+
+
+
+
+
+
+
+
+
+
+

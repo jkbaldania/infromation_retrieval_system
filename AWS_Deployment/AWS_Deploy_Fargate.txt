@@ -1,0 +1,13 @@
+aws elbv2 create-load-balancer --name IrsLoadBalancer --subnets subnet-09236287b3e945ed4 subnet-0330e3d9a473cf3c0 --security-groups sg-0a4ccb18bf877d763 --scheme internet-facing --type application --ip-address-type ipv4
+
+aws elbv2 create-target-group --name IrsTargetGroup1 --protocol HTTP --port 8081 --vpc-id vpc-04f4f3308068f13fe --target-type ip
+
+aws elbv2 create-listener --load-balancer-arn <elb-arn> --protocol HTTP --port 80 --default-actions Type=forward,TargetGroupArn=<target-group-arn>
+
+aws create-cluster --cluster-name irs-cluster
+
+create task definition
+
+aws create-service --cluster <cluster-arn> --service-name IrsService --task-definition <task-definition-arn> --load-balancers file://load-balancer.json --desired-count 1 --launch-type FARGATE --network-configuration file://task-networking.json --scheduling-strategy REPLICA --deployment-controller type=ECS
+
+aws list-services --cluster irs-cluster
