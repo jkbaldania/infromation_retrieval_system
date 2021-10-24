@@ -1,5 +1,5 @@
 # Information Retrieval System
-A Java Spring Boot based REST Web Application for the use case of Information Retrieval of Documents (under development).
+A Java Spring Boot based REST Backend Web Application for the use case of Information Retrieval of Documents (under development).
 
 ## Use cases
 * User can register with email, username, password and name.
@@ -9,6 +9,9 @@ A Java Spring Boot based REST Web Application for the use case of Information Re
 * User should get the results of relevant files as a list with top matching file first, and also the relevance score.
 * User can delete any batch.
 * User can delete the account.
+
+## Proposed Architecture
+![proposed_architecture drawio](https://user-images.githubusercontent.com/56929164/138602823-de3c582f-1098-4ddd-92ee-f8093e67cc3e.png)
 
 ## Sequence Diagram
 ![sequence_diagram drawio](https://user-images.githubusercontent.com/56929164/138592494-11c891c6-c2fe-49de-9b5d-741b2de3fc6b.png)
