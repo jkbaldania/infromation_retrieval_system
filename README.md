@@ -14,9 +14,7 @@ This repository is created to develop a Java Spring Boot based REST Web Applicat
 
 ### POST /register
 #### Request:
-     curl --location --request POST 'localhost:8881/register'
-     --header 'Content-Type: application/json'
-     --data-raw '{"username":"jkbaldania","email":"jkbaldania@gmail.com","name":"Jay Baldania","password":"jkbaldania"}'
+![register request](http://github.com/jkbaldania/infromation_retrieval_system/blob/main/Media/usage_ms1_post_register_request.PNG)
      
 #### Response:
      
